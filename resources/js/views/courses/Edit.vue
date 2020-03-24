@@ -1,10 +1,17 @@
+<!--
+@Date:   2020-03-18T12:21:46+00:00
+@Last modified time: 2020-03-24T14:13:30+00:00
+-->
+
+
+
 <template>
   <b-row align-h="center">
     <b-col cols="8">
       <h3 v-if="!loggedIn">You are not logged in!!</h3>
       <b-card
         v-else
-        title="Edit Course"
+        title="Add Course"
         tag="article"
       >
 
