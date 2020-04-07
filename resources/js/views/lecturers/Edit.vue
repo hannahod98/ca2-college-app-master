@@ -1,6 +1,6 @@
 <!--
 @Date:   2020-03-31T14:28:16+01:00
-@Last modified time: 2020-04-06T15:45:04+01:00
+@Last modified time: 2020-04-07T22:04:23+01:00
 -->
 <template>
   <b-row align-h="center">
@@ -120,7 +120,6 @@
             address: app.lecturer.address,
             phone: app.lecturer.phone,
             email: app.lecturer.email,
-
 
         },
         {
