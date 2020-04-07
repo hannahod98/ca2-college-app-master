@@ -1,3 +1,10 @@
+<!--
+@Date:   2020-03-18T12:21:46+00:00
+@Last modified time: 2020-04-06T16:07:59+01:00
+-->
+
+
+
 <template>
   <div>
   <b-navbar toggleable="sm" type="dark" variant="dark">
@@ -9,6 +16,14 @@
       <b-nav-item-dropdown text="Courses" left>
         <b-dropdown-item to="/courses">View All</b-dropdown-item>
         <b-dropdown-item to="/courses/create">Create</b-dropdown-item>
+      </b-nav-item-dropdown>
+      <b-nav-item-dropdown text="Lecturers" left>
+        <b-dropdown-item to="/lecturers">View All</b-dropdown-item>
+        <b-dropdown-item to="/lecturers/create">Create</b-dropdown-item>
+      </b-nav-item-dropdown>
+      <b-nav-item-dropdown text="Enrolments" left>
+        <b-dropdown-item to="/enrolments">View All</b-dropdown-item>
+        <b-dropdown-item to="/enrolments/create">Create</b-dropdown-item>
       </b-nav-item-dropdown>
     </b-navbar-nav>
 
@@ -31,9 +46,17 @@
 <script>
 export default {
   name: "myNavbar",
-  methods: {
+ props: {
+  loggedIn: Boolean
+ },
+ logout() {
+      localStorage.removeItem('token'); // can now move this to App.vue's logout method
+      this.$emit('logout'); //<-- tells App.vue to update loggedIn
+      this.$router.push('/');
+    },
+ methods: {
 
-  }
+}
 };
 </script>
 <style>

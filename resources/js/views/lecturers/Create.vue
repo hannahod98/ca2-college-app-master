@@ -1,89 +1,78 @@
+<!--
+@Date:   2020-03-31T14:28:01+01:00
+@Last modified time: 2020-03-31T19:39:18+01:00
+-->
+
+
+
 <template>
   <b-row>
     <b-col cols="8">
 
-      <b-card title="Add Course" tag="article">
+      <b-card title="Add Lecturer" tag="article">
         <b-form @submit="onSubmit">
           <b-form-group
             id="input-group-1"
-            label="Title:"
+            label="Name:"
             label-for="input-1"
           >
           <b-form-input
             id="input-1"
             type="text"
             required
-            placeholder="Enter title"
-            v-model="form.title"
+            placeholder="Enter name"
+            v-model="form.name"
           >
           </b-form-input>
           </b-form-group>
 
           <b-form-group
             id="input-group-2"
-            label="Code:"
+            label="Address:"
             label-for="input-2"
           >
           <b-form-input
             id="input-2"
             type="text"
             required
-            placeholder="Enter code"
-            v-model="form.code"
+            placeholder="Enter address"
+            v-model="form.address"
           >
           </b-form-input>
-          <b-form-invalid-feedback :state="codeValid">
-           The code may not be greater than 5 characters.
-          </b-form-invalid-feedback>
-          <b-form-valid-feedback :state="codeValid">
-            Looks Good.
-          </b-form-valid-feedback>
           </b-form-group>
 
           <b-form-group
             id="input-group-3"
-            label="Description:"
-            label-for="input-3"
+            label="Phone:"
+            label-for="input-4"
           >
           <b-form-input
             id="input-3"
-            type="text"
+            type="tel"
             required
-            placeholder="Enter description"
-            v-model="form.description"
+            placeholder="Enter a phone number"
+            v-model="form.phone"
           >
           </b-form-input>
           </b-form-group>
 
           <b-form-group
             id="input-group-4"
-            label="Points:"
+            label="Email:"
             label-for="input-4"
           >
           <b-form-input
             id="input-4"
-            type="number"
+            type="text"
             required
-            placeholder="Enter points"
-            v-model="form.points"
+            placeholder="Enter email"
+            v-model="form.email"
           >
           </b-form-input>
+
           </b-form-group>
 
-          <b-form-group
-            id="input-group-5"
-            label="Level:"
-            label-for="input-5"
-          >
-          <b-form-input
-            id="input-5"
-            type="number"
-            required
-            placeholder="Enter level"
-            v-model="form.level"
-          >
-          </b-form-input>
-          </b-form-group>
+
 
           <b-button type="submit" variant="primary">Submit</b-button>
         </b-form>
@@ -96,11 +85,11 @@ export default {
   data() {
     return {
       form: {
-        title: '',
-        code: '',
-        description: '',
-        points: '',
-        level: ''
+        name: '',
+        address: '',
+        phone: '',
+        email: ''
+
       },
       loggedIn: false,
       errors: []
@@ -119,17 +108,17 @@ export default {
       let app = this;
       let token = localStorage.getItem('token');
 
-      axios.post('/api/courses', {
-        title: app.form.title,
-        code: app.form.code,
-        description: app.form.description,
-        points: app.form.points,
-        level: app.form.level
+      axios.post('/api/lecturers', {
+        name: app.form.name,
+        address: app.form.address,
+        phone: app.form.phone,
+        email: app.form.email
+
       }, {
         headers: { Authorization: `Bearer ${token}`}
       })
       .then(function(response) {
-        app.$router.push('/courses');
+        app.$router.push('/lecturers');
       })
       .catch(function (error) {
         console.log(error.response.data);
@@ -154,7 +143,6 @@ export default {
     setLoggedOut() {
       this.loggedIn = false;
     }
-
   }
 }
 </script>

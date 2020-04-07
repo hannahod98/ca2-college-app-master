@@ -1,89 +1,75 @@
 <!--
-@Date:   2020-03-18T12:21:46+00:00
-@Last modified time: 2020-04-06T15:44:08+01:00
+@Date:   2020-03-31T14:28:16+01:00
+@Last modified time: 2020-04-06T15:45:04+01:00
 -->
-
-
-
 <template>
   <b-row align-h="center">
     <b-col cols="8">
       <h3 v-if="!loggedIn">You are not logged in!!</h3>
       <b-card
         v-else
-        title="Edit Course"
+        title="Edit Lecturer"
         tag="article"
       >
 
         <b-form @submit="onSubmit">
           <b-form-group
             id="input-group-1"
-            label="Title:"
+            label="Name:"
             label-for="input-1"
           >
             <b-form-input
               id="input-1"
-              v-model="course.title"
+              v-model="lecturer.name"
               type="text"
               required
-              placeholder="Enter title"
+              placeholder="Enter name"
             ></b-form-input>
           </b-form-group>
 
           <b-form-group
             id="input-group-2"
-            label="Code:"
-            label-for="input-2">
+            label="address"
+            label-for="input-2"
+          >
             <b-form-input
               id="input-2"
-              v-model="course.code"
+              v-model="lecturer.address"
               type="text"
               required
-              placeholder="Enter code"
+              placeholder="Enter address"
             ></b-form-input>
           </b-form-group>
 
           <b-form-group
             id="input-group-3"
-            label="Description:"
+            label="Phone:"
             label-for="input-3"
           >
             <b-form-input
               id="input-3"
-              v-model="course.description"
-              type="text"
+              v-model="lecturer.phone"
+              type="tel"
               required
-              placeholder="Enter description"
+              placeholder="Enter phone number"
             ></b-form-input>
           </b-form-group>
 
           <b-form-group
             id="input-group-4"
-            label="Points:"
+            label="Email"
             label-for="input-4"
           >
             <b-form-input
               id="input-4"
-              v-model="course.points"
-              type="number"
+              v-model="lecturer.email"
+              type="text"
               required
-              placeholder="Enter points"
+              placeholder="Enter email"
             ></b-form-input>
           </b-form-group>
 
-          <b-form-group
-            id="input-group-5"
-            label="Level:"
-            label-for="input-5"
-          >
-            <b-form-input
-              id="input-5"
-              v-model="course.level"
-              type="number"
-              required
-              placeholder="Enter level"
-            ></b-form-input>
-          </b-form-group>
+
 
           <b-button type="submit" variant="primary">Submit</b-button>
         </b-form>
@@ -96,7 +82,7 @@
   export default {
     data() {
       return {
-        course: {},
+        lecturer: {},
         show: true,
         loggedIn: false
       }
@@ -112,11 +98,11 @@
 
       let app = this;
       let token = localStorage.getItem('token');
-      axios.get(`/api/courses/${app.$route.params.id}`, {
+      axios.get(`/api/lecturers/${app.$route.params.id}`, {
         headers: { Authorization: "Bearer " + token }
       })
       .then(function (response) {
-        app.course = response.data.data;
+        app.lecturer = response.data.data;
       })
       .catch(function (error) {
         console.log(error);
@@ -129,18 +115,19 @@
 
         let app = this;
         let token = localStorage.getItem('token');
-        axios.put(`/api/courses/${app.$route.params.id}`, {
-            title: app.course.title,
-            code: app.course.code,
-            description: app.course.description,
-            points: app.course.points,
-            level: app.course.level,
+        axios.put(`/api/lecturers/${app.$route.params.id}`, {
+            name: app.lecturer.name,
+            address: app.lecturer.address,
+            phone: app.lecturer.phone,
+            email: app.lecturer.email,
+
+
         },
         {
           headers: { Authorization: "Bearer " + token }
         })
         .then(function (response) {
-          app.$router.push('/courses');
+          app.$router.push('/lecturers');
         })
         .catch(function (error) {
           console.log(error);
@@ -152,7 +139,6 @@
     setLoggedOut() {
       this.loggedIn = false;
     }
-
     }
   }
 </script>
